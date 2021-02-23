@@ -1,0 +1,3 @@
+[submodule "QCGym"]
+	path = QCGym
+	url = git@github.com:oddgr8/QCGym.git
