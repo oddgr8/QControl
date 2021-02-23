@@ -37,7 +37,7 @@ def setup_and_train():
     # Define configuration with hyperparam and training details
     config = {
         "log_level": "WARN",
-        "num_workers": 3,
+        "num_workers": 2,
         "num_cpus_for_driver": 1,
         "num_cpus_per_worker": 1,
         # "num_gpus_per_worker": 0.33,
