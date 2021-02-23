@@ -35,36 +35,38 @@ def setup_and_train():
     #     return 'agent-' + str(agent_id)
 
     # Define configuration with hyperparam and training details
-    config={
-                "log_level": "WARN",
-                "num_workers": 3,
-                "num_cpus_for_driver": 1,
-                "num_cpus_per_worker": 1,
-                "num_sgd_iter": 10,
-                "train_batch_size": 128,
-                "lr": 5e-3,
-                "model":{"fcnet_hiddens": [300, 300, 300]},
-                # "multiagent": {
-                #     "policies": policy_graphs,
-                #     "policy_mapping_fn": policy_mapping_fn,
-                # },
-                "env": "cross_resonance"}
+    config = {
+        "log_level": "WARN",
+        "num_workers": 3,
+        "num_cpus_for_driver": 1,
+        "num_cpus_per_worker": 1,
+        # "num_gpus_per_worker": 0.33,
+        "num_sgd_iter": 10,
+        "train_batch_size": 128,
+        "lr": 5e-3,
+        "model": {"fcnet_hiddens": [300, 300, 300]},
+        # "multiagent": {
+        #     "policies": policy_graphs,
+        #     "policy_mapping_fn": policy_mapping_fn,
+        # },
+        "env": "cross_resonance"}
 
     # Define experiment details
     exp_name = 'cross_res'
     exp_dict = {
-            'name': exp_name,
-            'run_or_experiment': 'PPO',
-            "stop": {
-                "training_iteration": 1000
-            },
-            'checkpoint_freq': 20,
-            "config": config,
-        }
+        'name': exp_name,
+        'run_or_experiment': 'PPO',
+        "stop": {
+            "training_iteration": 1000
+        },
+        'checkpoint_freq': 20,
+        "config": config,
+    }
 
     # Initialize ray and run
     ray.init()
     tune.run(**exp_dict)
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     setup_and_train()
