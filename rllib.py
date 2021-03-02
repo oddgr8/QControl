@@ -5,7 +5,7 @@ from ray.rllib.models import ModelCatalog
 from ray.tune import run_experiments
 from ray.tune.registry import register_env
 from ray.rllib.agents.ppo import PPOTrainer
-from QCGym.environments.generic_env import GenericEnv
+from QCGym.environments.interactive_env import InteractiveEnv
 
 
 # Driver code for training
@@ -13,8 +13,8 @@ def setup_and_train():
 
     # Create a single environment and register it
     def env_creator(_):
-        return GenericEnv()
-    single_env = GenericEnv(max_timesteps=100)
+        return InteractiveEnv()
+    single_env = InteractiveEnv(max_timesteps=100)
     env_name = "cross_resonance"
     register_env(env_name, env_creator)
 
@@ -57,7 +57,7 @@ def setup_and_train():
         'name': exp_name,
         'run_or_experiment': 'PPO',
         "stop": {
-            "training_iteration": 1000
+            "training_iteration": 500
         },
         'checkpoint_freq': 20,
         "config": config,
